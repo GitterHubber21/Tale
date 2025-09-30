@@ -1,31 +1,35 @@
 const line1 = document.getElementById("line1");
 const line2 = document.getElementById("line2");
 const buttonBlock = document.getElementById("buttonBlock");
-const arrowBody = document.getElementById("arrowBody");
-const arrowTip = document.getElementById("arrowTip");
 
+function typeLine(el, duration, callback) {
+  const chars = el.textContent.length;
+  el.style.width = "0ch";
+  el.style.opacity = "1";
+  el.style.borderRight = ".15em solid black";
+  el.style.animation = `typewriter ${duration}ms steps(${chars}, end) forwards`;
+  el.style.setProperty("--target-width", chars + "ch");
 
-line1.style.animation = "typewriter 3s steps(60, end) forwards";
+  const animation = el.animate(
+    [{ width: "0ch" }, { width: chars + "ch" }],
+    {
+      duration: duration,
+      easing: `steps(${chars}, end)`,
+      fill: "forwards"
+    }
+  );
 
-setTimeout(() => {
-  line1.style.borderRight = "none";
-  line2.style.animation = "typewriter 3s steps(60, end) forwards";
-}, 3000);
+  animation.onfinish = () => {
+    el.style.borderRight = "none";
+    if (callback) callback();
+  };
+}
 
-setTimeout(() => {
-  line2.style.borderRight = "none";
-  buttonBlock.style.opacity = "1";
-}, 6000);
-
-setTimeout(() => {
-  arrowBody.style.animation = "drawArrow 2s ease forwards";
-}, 6000);
-
-
-setTimeout(() => {
-  arrowTip.style.animation = "drawArrow 1s ease forwards";
-}, 8000);
-
+typeLine(line1, 2500, () => {
+  typeLine(line2, 2500, () => {
+    buttonBlock.style.opacity = "1";
+  });
+});
 
 document.querySelector(".get-started").addEventListener("click", () => {
   alert("Let's start writing together!");

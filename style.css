@@ -12,8 +12,9 @@ h1, p {
   white-space: nowrap;
   overflow: hidden;
   border-right: .15em solid black;
-  width: 0;
   margin: 0 auto;
+  display: block;
+  width: 0ch;
 }
 
 h1 {
@@ -43,7 +44,6 @@ p {
   margin-bottom: 25px;
 }
 
-
 .get-started {
   background-color: #c6a882;
   border: none;
@@ -59,29 +59,7 @@ p {
   background-color: #b08c65;
 }
 
-.arrow {
-  position: absolute;
-  top: -10px;
-  left: -90px;
-  transform: translateX(-50%) scaleY(-1);
-  width: 200px;
-  height: 200px;
-}
-
-.arrow path {
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  opacity: 0;
-}
-
 @keyframes typewriter {
   from { width: 0; opacity: 1; }
   to { width: 100%; opacity: 1; }
-}
-
-@keyframes drawArrow {
-  to {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
 }
